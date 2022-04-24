@@ -3,7 +3,7 @@
 Vagrant.configure("2") do |config|
   config.vm.define "alma" do |alma8|
     alma8.vm.box = "almalinux/8"
-    alma8.vm.network "private_network", ip: "192.168.33.11"
+    alma8.vm.network "private_network", ip: "192.168.56.11"
     alma8.vm.hostname =  "alma8"
     alma8.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.define "opensuse" do |os|
     os.vm.box = "opensuse/Leap-15.2.x86_64"
-    os.vm.network "private_network", ip: "192.168.33.12"
+    os.vm.network "private_network", ip: "192.168.56.12"
     os.vm.hostname = "opensuse"
     os.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
@@ -19,10 +19,10 @@ Vagrant.configure("2") do |config|
   end
   config.vm.define "ubuntu" do |ubuntu|
     ubuntu.vm.box = "ubuntu/focal64"
-    ubuntu.vm.network "private_network", ip: "192.168.33.13"
+    ubuntu.vm.network "private_network", ip: "192.168.56.13"
     ubuntu.vm.hostname =  "ubuntu"
     ubuntu.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+      vb.memory = "4096"
     end
   end
 end
