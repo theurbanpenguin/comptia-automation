@@ -1,2 +1,2 @@
 # comptia-automation
-Used on my Comptia Linux+ course Autimation Section
+Used on my Comptia Linux+ course Automation Section
