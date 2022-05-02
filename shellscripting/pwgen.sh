@@ -12,5 +12,8 @@ fi
   if [ "$PWD_LEN" -gt 6 ]; then
     PWD_OK="true"
     echo "$PASSWORD"
+  else
+    echo "Password too short"
+    exit 2
   fi
 done
