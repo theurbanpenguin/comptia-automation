@@ -1,7 +1,7 @@
 # vim: set ft=ruby ts=2 sw=2 et ai :
 service { 'sshd':
   ensure => 'running',
-  enable => 'true',
+  enable => true,
  }
 file_line { 'root_ssh':
   path => '/etc/ssh/sshd_config',
