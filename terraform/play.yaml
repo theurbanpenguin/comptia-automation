@@ -1,24 +1,24 @@
 ---
-- name: Setup Terraform
+- name: Setup Terraform on New Ubuntxu 20.04 System
   hosts: localhost
   gather_facts: true
   tasks:
-    - name: update apt cache
+    - name: Update the APT Package Cache
       become: true
       apt:
         update_cache: true
         cache_valid_time: 3600
-    - name: add terraform key
+    - name: Before we add the Hashicorp Repo - we add the signing key
       become: true
       apt_key:
         url: "https://apt.releases.hashicorp.com/gpg"
         state: present
-    - name: add terraform repo
+    - name: We now add the Hashicorp Repo to Ubuntu
       become: true
       apt_repository:
         repo: "deb [arch=amd64] https://apt.releases.hashicorp.com focal main"
         state: present
-    - name: install software
+    - name: Install software from standard repos and hashicorp
       become: true
       package:
         name:
@@ -27,29 +27,29 @@
           - software-properties-common
           - curl
           - terraform
-    - name: add user to group
+    - name: We add the local USER to the Docker group
       become: true
       user:
         name: "{{ lookup('env', 'USER') }}"
         groups: docker
         append: true
-    - name: add course repo
+    - name: We clone the course git repository
       git:
         repo: "https://github.com/theurbanpenguin/comptia-automation.git"
         dest: "{{ lookup('env', 'HOME') }}/comptia-automation"
-    - name: create terraform dir
+    - name: We create the directory for terraform porject
       file:
         path: "{{ lookup('env', 'HOME') }}/terraform/"
         state: directory
-    - name: create web dir
+    - name: We create the web directory to store content
       file:
         path: "{{ lookup('env', 'HOME') }}/terraform/web"
         state: directory
-    - name: add main.tf
+    - name: We copy the main.tf terraforn file from the course repo
       copy:
         src: "{{ lookup('env', 'HOME') }}/comptia-automation/terraform/main.tf"
         dest: "{{ lookup('env', 'HOME') }}/terraform/main.tf"
-    - name: add web content
+    - name: Create the index page for the website
       copy:
         dest: "{{ lookup('env', 'HOME') }}/terraform/web/index.html"
         content: This is my web page
