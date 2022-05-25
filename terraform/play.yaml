@@ -21,29 +21,35 @@
     - name: install software
       become: true
       package:
-        - names:
-            - docker.io
-            - gnupg
-            - software-properties-common
-            - curl
-            - terraform
+        name:
+          - docker.io
+          - gnupg
+          - software-properties-common
+          - curl
+          - terraform
+    - name: add user to group
+      become: true
+      user:
+        name: "{{ lookup('env', 'USER') }}"
+        groups: docker
+        append: true
     - name: add course repo
       git:
         repo: "https://github.com/theurbanpenguin/comptia-automation.git"
         dest: "{{ lookup('env', 'HOME') }}/comptia-automation"
     - name: create terraform dir
-        file:
-          path: "{{ lookup('env', 'HOME') }}/terraform/"
-          state: directory
+      file:
+        path: "{{ lookup('env', 'HOME') }}/terraform/"
+        state: directory
     - name: create web dir
-        file:
-          path: "{{ lookup('env', 'HOME') }}/terraform/web"
-          state: directory
+      file:
+        path: "{{ lookup('env', 'HOME') }}/terraform/web"
+        state: directory
     - name: add main.tf
-        copy:
-          src: "{{ lookup('env', 'HOME') }}/comptia-automation/terraform/main.tf"
-          dest: "{{ lookup('env', 'HOME') }}/terraform/main.tf"
+      copy:
+        src: "{{ lookup('env', 'HOME') }}/comptia-automation/terraform/main.tf"
+        dest: "{{ lookup('env', 'HOME') }}/terraform/main.tf"
     - name: add web content
-        copy:
-          dest: "{{ lookup('env', 'HOME') }}/terraform/web/index.html"
-          content: This is my web page
+      copy:
+        dest: "{{ lookup('env', 'HOME') }}/terraform/web/index.html"
+        content: This is my web page
