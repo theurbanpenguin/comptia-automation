@@ -37,6 +37,7 @@
       git:
         repo: "https://github.com/theurbanpenguin/comptia-automation.git"
         dest: "{{ lookup('env', 'HOME') }}/comptia-automation"
+        version: main
     - name: We create the directory for terraform porject
       file:
         path: "{{ lookup('env', 'HOME') }}/terraform/"
@@ -45,7 +46,7 @@
       file:
         path: "{{ lookup('env', 'HOME') }}/terraform/web"
         state: directory
-    - name: We copy the main.tf terraforn file from the course repo
+    - name: We copy the main.tf terraform file from the course repo
       copy:
         src: "{{ lookup('env', 'HOME') }}/comptia-automation/terraform/main.tf"
         dest: "{{ lookup('env', 'HOME') }}/terraform/main.tf"
