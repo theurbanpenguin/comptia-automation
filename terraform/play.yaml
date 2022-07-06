@@ -38,7 +38,7 @@
         repo: "https://github.com/theurbanpenguin/comptia-automation.git"
         dest: "{{ lookup('env', 'HOME') }}/comptia-automation"
         version: main
-    - name: We create the directory for terraform porject
+    - name: We create the directory for terraform project
       file:
         path: "{{ lookup('env', 'HOME') }}/terraform/"
         state: directory
