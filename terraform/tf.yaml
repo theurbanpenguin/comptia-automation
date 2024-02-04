@@ -3,7 +3,6 @@
   hosts: localhost
   gather_facts: true
   tasks:
-
     - name: Before we add the Hashicorp Repo - we add the signing key
       become: true
       apt_key:
@@ -12,7 +11,7 @@
     - name: We now add the Hashicorp Repo to Ubuntu
       become: true
       apt_repository:
-        repo: "deb [arch=amd64] https://apt.releases.hashicorp.com focal main"
+        repo: "deb [arch=amd64] https://apt.releases.hashicorp.com jammy main"
         state: present
     - name: Install software from standard repos and hashicorp
       become: true
