@@ -16,7 +16,7 @@
     - name: Install software from standard repos and hashicorp
       become: true
       apt:
-        name: terraform
+        name: zsh
         state: present
         update_cache: true
       environment:
