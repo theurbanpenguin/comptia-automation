@@ -2,22 +2,10 @@
 - name: Setup Terraform on New Ubuntu 20.04 System
   hosts: localhost
   gather_facts: true
+  become: true
   tasks:
-    - name: Before we add the Hashicorp Repo - we add the signing key
-      become: true
-      apt_key:
-        url: "https://apt.releases.hashicorp.com/gpg"
-        state: present
-    - name: We now add the Hashicorp Repo to Ubuntu
-      become: true
-      apt_repository:
-        repo: "deb [arch=amd64] https://apt.releases.hashicorp.com jammy main"
-        state: present
-    - name: Install software from standard repos and hashicorp
-      become: true
-      apt:
-        name: zsh
-        state: present
-        update_cache: true
-      environment:
-        http_proxy: "{{ lookup('env', 'HTTP_PROXY') }}"
+    - name: install opentofu
+      community.general.snap:
+        name:
+          - opentofu
+        classic: true
