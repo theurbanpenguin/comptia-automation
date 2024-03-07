@@ -1,10 +1,15 @@
 #!/bin/bash
-# OUI Look file added with ieee-data package
-FILE=/usr/share/ieee-data/oui.txt
+# OUI Look file added with ieee-data/hwdata package
+id_like=$(awk -F= '/^ID_LIKE/{print $2}' /etc/os-release)
+if [ "$id_like" == "debian" ]; then
+  FILE=/usr/share/ieee-data/oui.txt
+else
+  FILE=/usr/share/hwdata/oui.txt
+fi
 
 # Check file is there
 if [ ! -f $FILE ]; then
-  echo "$FILE not found, install ieee-data"
+  echo "$FILE not found, install ieee-data for Debian or hwdata for RHEL"
   exit 1
 fi
 
