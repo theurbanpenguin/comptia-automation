@@ -1,10 +1,10 @@
 #!/bin/bash
-# OUI Look file added with ethtool package
+# OUI Look file added with ieee-data package
 FILE=/usr/share/ieee-data/oui.txt
 
 # Check file is there
 if [ ! -f $FILE ]; then
-  echo "$FILE not found, install ethtool"
+  echo "$FILE not found, install ieee-data"
   exit 1
 fi
 
